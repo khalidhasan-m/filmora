@@ -1,185 +1,121 @@
-# React + Vite
+# 🎬 Filmora — Movie & TV Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, responsive web application to discover, search, and explore movies and TV shows from around the world. Powered by the free TVMaze REST API with real-time title search, genre filtering, rich modal details, and seamless light/dark mode support.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌟 Key Features
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-
-
-
-
-# 🎬 Assignment: Movie Explorer
-
-> **Objective:** Build a responsive **Movie Explorer Application** using React. Users should be able to browse movies, search for specific titles, and view detailed information in an interactive modal.
+- **Live TVMaze API Integration**: Real-time searching across thousands of shows and series with debounced queries.
+- **Interactive Details Modal**: Deep dive into show overviews, high-resolution backdrops, critic ratings, air dates, networks, and official links.
+- **Genre Filtering & Sorting**: Filter by popular categories (Drama, Action, Comedy, Sci-Fi, Thriller, etc.) and sort by popularity, rating, release year, or title.
+- **Day & Night Mode**: Instant theme toggle with local storage persistence and zero-white-flash on page reload.
+- **Smooth Skeleton Loading**: Preserves layout stability and prevents content shifting while fetching data.
+- **Resilient Error Handling**: Includes a custom 404 page and an application Error Boundary to gracefully catch runtime errors.
+- **Fully Responsive**: Optimized for all devices from mobile screens to ultrawide displays with accessible semantic HTML.
 
 ---
 
 ## 🛠️ Technology Stack
 
-* **Core:** JavaScript, React
-* **Styling:** CSS, Tailwind CSS *(Optional but recommended)*
-* **Data:** Free Movie Database API *(e.g., OMDB, TMDB, TVMaze)*
-* **TVMaze Doc:** [API](https://www.tvmaze.com/api)
+- **Framework**: [React 19](https://react.dev/)
+- **Bundler & Tooling**: [Vite](https://vite.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **Data Source**: [TVMaze API](https://www.tvmaze.com/api)
+- **Linter**: [Oxlint](https://oxc.rs/)
 
 ---
 
-## 📋 Features & Requirements
+## 📂 Project Structure
 
-###  1. Home Page
-
-The Home Page serves as the landing page and must include the following sections:
-
-####  Navbar
-* Application logo or brand name.
-* Navigation links.
-* A prominent button/link to navigate to the **Movie Listing Page**.
-
-####  Hero Banner
-A visually attractive section to hook the user. It must include:
-* A movie-related background image or gradient.
-* Application title/heading.
-* A short, engaging description.
-* A Call-To-Action (CTA) button navigating to the **Movie Listing Page**.
-
-**📐 UI Wireframe Example:**
 ```text
-╭──────────────────────────────────────────────────────╮
-│  🎬 MovieExplorer                        [ Movies ]  │
-├──────────────────────────────────────────────────────┤
-│                                                      │
-│                 DISCOVER MOVIES                      │
-│                                                      │
-│        Explore and discover your favorite            │
-│        movies from around the world.                 │
-│                                                      │
-│                 [   Explore Now ]                    │
-│                                                      │
-╰──────────────────────────────────────────────────────╯
+Filmora/
+├── public/
+│   └── favicon.svg           # Custom vector cinema favicon
+├── src/
+│   ├── components/
+│   │   ├── ui/               # Reusable UI primitives (Button, EmptyState, SectionHeader)
+│   │   ├── ErrorBoundary.jsx # React class error boundary
+│   │   ├── Footer.jsx        # App footer with navigation & social links
+│   │   ├── HeroBanner.jsx    # Cinematic landing hero banner with stats
+│   │   ├── MovieCard.jsx     # Responsive movie poster card
+│   │   ├── MovieDetailsModal.jsx # Detailed show modal overlay
+│   │   ├── Navbar.jsx        # Sticky navigation with mobile menu
+│   │   ├── PageLayout.jsx    # Shared page scaffold
+│   │   ├── SearchBar.jsx     # Search input, genre pills & sorting controls
+│   │   ├── SkeletonCard.jsx  # Card loading shimmer placeholder
+│   │   └── ThemeToggle.jsx   # Animated Sun/Moon theme switcher
+│   ├── context/
+│   │   └── ThemeContext.jsx  # Theme provider & persistence
+│   ├── data/
+│   │   └── homeData.js       # Static highlights and genre metadata
+│   ├── lib/
+│   │   ├── api.js            # TVMaze API client methods
+│   │   ├── useDocumentTitle.js # Dynamic document title & SEO hook
+│   │   └── utils.js          # HTML strippers, date & rating formatters
+│   ├── pages/
+│   │   ├── Home.jsx          # Landing page with trending titles & genres
+│   │   ├── Movies.jsx        # Full movie catalog with search & filters
+│   │   ├── ErrorPage.jsx     # Error state presentation
+│   │   └── NotFound.jsx      # Custom 404 page
+│   ├── App.jsx               # Router & ErrorBoundary root
+│   ├── index.css             # Tailwind v4 configuration & theme variables
+│   └── main.jsx              # React application entry point
+├── index.html                # HTML entrypoint with metadata & anti-flash script
+├── package.json              # Project dependencies & scripts
+└── vite.config.js            # Vite configuration
 ```
-
-####  Footer
-* Application name.
-* Copyright information (e.g., `© 2026 MovieExplorer`).
-* Optional social media or GitHub links.
 
 ---
 
-###  2. Movie Listing Page
+## 🚀 Getting Started
 
-Create a dedicated page where users can browse and search for movies.
+### Prerequisites
 
-####  Search Functionality
-* Include a prominent search bar at the top of the page.
-* Users must be able to search by **movie title**.
-* The movie grid should dynamically update based on the search query.
+Make sure you have [Node.js](https://nodejs.org/) (v18 or higher) installed on your machine.
 
-** UI Wireframe Example:**
-```text
-╭──────────────────────────────────────────────────────╮
-│  🔍 Search for a movie...                            │
-╰──────────────────────────────────────────────────────╯
-```
-### Search Shows
+### Installation
 
-**Endpoint:** `GET /search/shows?q=:query`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/khalidhasan-m/Filmora.git
+   cd Filmora
+   ```
 
-**Example:**
-```bash
-GET https://api.tvmaze.com/search/shows?q=girls
-```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-#### 🌐 API Integration & State Management
-Fetch movie data from your chosen **Free Movie Database API**. 
+3. Start the local development server:
+   ```bash
+   npm run dev
+   ```
 
-#### 🎬 Movie Cards
-Display movies using reusable Card components. Each card must include:
-* Movie poster image.
-* Movie title/name.
-* Release year/date.
-* Rating (e.g., ⭐ 8.5).
-* A `See Details` button.
-
-** UI Wireframe Example:**
-```text
-╭─────────────────────╮
-│                     │
-│       Poster        │
-│                     │
-├─────────────────────┤
-│  Movie Title        │
-│  ⭐ 8.5  •  📅2024  │
-│                     │
-│  [ See Details ]    │
-╰─────────────────────╯
-```
->  **Requirement:** Cards must be displayed using a **responsive CSS Grid or Flexbox layout**.
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-### All Shows/Movie
+## 📜 Available Scripts
 
-**Endpoint:**  
-`GET /shows`
-
-**Example:**  
-```bash
-GET https://api.tvmaze.com/shows
-```
-
-**Description:**  
-Fetch all available TV shows.
-
-
-### 🎞️ 3. Movie Details Modal
-
-When a user clicks the **See Details** button, open a modal overlay displaying in-depth information about the selected movie.
-
-**Modal Contents:**
-* Movie backdrop image or large poster.
-* Movie title.
-* Overview / Summary.
-* Rating and Release date.
-* Any additional relevant info from the API (e.g., Genre, Director).
-
-** UI Wireframe Example:**
-```text
-╭──────────────────────────────────────────────╮
-│                                      [ ✕ ]   │
-├──────────────────────────────────────────────┤
-│                                              │
-│               MOVIE BACKDROP                 │
-│                                              │
-├──────────────────────────────────────────────┤
-│  Movie Title                                 │
-│  ⭐ Rating: 8.5   |   📅 Release: 2024       │
-│                                              │
-│  Overview:                                   │
-│  Movie description goes here...              │
-│                                              │
-│                              [ ❌ Close ]    │
-╰──────────────────────────────────────────────╯
-```
-
-**Interaction Requirements:**
-* Must be closable via the `✕` (Close) button.
-* *Optional:* Closable by clicking outside the modal (on the backdrop).
+- `npm run dev` — Starts the Vite development server with Hot Module Replacement (HMR).
+- `npm run build` — Compiles and optimizes assets for production deployment into `dist/`.
+- `npm run preview` — Locally preview the production build.
+- `npm run lint` — Runs Oxlint across all project files.
 
 ---
 
-## 📱 Responsive Design & UX
+## 👤 Author
 
-The application must be fully responsive and provide a seamless experience across all devices:
-*  **Mobile:** Single column layout, stacked elements, touch-friendly buttons.
-*  **Desktop:** 3-4+ column grid for movie cards, optimized spacing.
+- **Khalid Hasan**
+- GitHub: [@khalidhasan-m](https://github.com/khalidhasan-m)
+- Portfolio: [khalidhasan.vercel.app](https://portfolio-nextjs-virid-sigma.vercel.app/)
+- LinkedIn: [in/khalidhasanmeskat](https://www.linkedin.com/in/khalidhasanmeskat)
 
 ---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
