@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Filmora — Discover Movies & TV Shows</title>
+    <meta name="description" content="Explore thousands of movies and TV shows. Search titles, inspect critic ratings, release dates, and deep dive into summaries with Filmora." />
+    <meta name="keywords" content="movies, tv shows, tv series, film explorer, ratings, movie database, streaming guide" />
+    <meta name="author" content="Filmora" />
+    <meta name="theme-color" content="#090a0f" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Filmora — Discover Movies & TV Shows" />
+    <meta property="og:description" content="Explore thousands of movies and TV shows. Search titles, inspect critic ratings, release dates, and deep dive into summaries with Filmora." />
+    <meta property="og:site_name" content="Filmora" />
+    <meta property="og:image" content="/favicon.svg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Filmora — Discover Movies & TV Shows" />
+    <meta name="twitter:description" content="Explore thousands of movies and TV shows. Search titles, inspect critic ratings, release dates, and deep dive into summaries with Filmora." />
+    <meta name="twitter:image" content="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=optional" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+    <!-- Prevent theme flash before first paint -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('filmora-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved === 'light' ? 'light'
+                    : saved === 'dark'  ? 'dark'
+                    : prefersDark      ? 'dark'
+                    : 'light';
+          var root = document.documentElement;
+          root.classList.remove('light', 'dark');
+          root.classList.add(theme);
+          root.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
